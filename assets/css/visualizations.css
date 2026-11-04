@@ -1,0 +1,38 @@
+/* Prompt-injection article: illustrative visualizations and local-only demo. */
+.matrix-figure, .chain-figure { margin: 30px 0 32px; padding: 19px; border: 1px solid #e0ddf3; border-radius: 15px; background: #f1f0fa; }
+.matrix-figure figcaption, .chain-figure figcaption { margin-bottom: 8px; color: #514b7d; font-family: var(--mono); font-size: 11px; font-weight: 500; }
+.matrix-note { margin: 0 0 13px; color: var(--muted); font-size: 12px; }
+.matrix-scroll { overflow-x: auto; }
+.attention-matrix { width: 100%; min-width: 430px; border-collapse: separate; border-spacing: 5px; font-family: var(--mono); font-size: 11px; }
+.attention-matrix th { padding: 8px; color: var(--muted); font-weight: 400; text-align: left; }
+.attention-matrix td { padding: 10px 12px; border-radius: 6px; background: rgba(85,73,216,var(--weight)); color: var(--ink); text-align: center; }
+.attention-matrix tbody th { color: var(--ink); }
+.chain-flow { display: grid; grid-template-columns: 1fr 24px 1fr 24px 1fr; align-items: center; gap: 7px; }
+.chain-flow span { display: grid; min-height: 64px; place-items: center; padding: 10px; border: 1px solid #dedbe9; border-radius: 10px; background: var(--white); font-size: 12px; font-weight: 600; text-align: center; }
+.chain-flow span:nth-of-type(2) { border-color: #f1d4c1; background: #fff7f0; }
+.chain-flow span:nth-of-type(3) { border-color: #d9e3b4; background: #fbfced; }
+.chain-flow b { color: var(--accent); text-align: center; }
+.injection-lab { margin: 22px 0 30px; padding: 19px; border: 1px solid var(--line); border-radius: 14px; background: var(--white); }
+.injection-lab > p { margin: 0 0 13px; font-size: 14px; }
+.injection-lab .lab-label { color: var(--accent-dark); font-family: var(--mono); font-size: 10px; text-transform: uppercase; }
+.injection-lab code { overflow-wrap: anywhere; }
+.lab-actions { display: flex; flex-wrap: wrap; gap: 9px; margin: 16px 0; }
+.lab-actions button { min-height: 42px; padding: 9px 13px; border: 1px solid var(--accent); border-radius: 8px; background: var(--accent); color: white; font: 600 13px var(--sans); cursor: pointer; }
+.lab-actions button + button { background: white; color: var(--accent-dark); }
+.lab-actions button:hover { filter: brightness(.94); }
+.lab-actions button:focus-visible, .matrix-scroll:focus-visible { outline: 3px solid var(--lime); outline-offset: 3px; }
+.lab-log { min-height: 100px; margin: 0; padding: 12px 12px 12px 35px; border-radius: 9px; background: #f7f6f1; font-size: 13px; }
+.lab-log li { margin: 5px 0; }
+.injection-lab .lab-safety { margin: 12px 0 0; color: var(--muted); font-size: 11px; }
+@media (max-width: 600px) {
+  .matrix-figure, .chain-figure { padding: 14px; }
+  .chain-flow { grid-template-columns: 1fr; gap: 5px; }
+  .chain-flow span { min-height: 48px; }
+  .chain-flow b { transform: rotate(90deg); line-height: 1; }
+  .injection-lab { padding: 15px; }
+}
+@media print {
+  .injection-lab { display: none; }
+  .matrix-figure, .chain-figure { break-inside: avoid; background: white; }
+  .attention-matrix td { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}
