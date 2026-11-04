@@ -2,17 +2,19 @@
 layout: default
 ---
 <article class="post">
+  <a class="back-link" href="{{ '/' | relative_url }}"><span aria-hidden="true">←</span> All articles</a>
   <header class="post-header">
-    <p class="eyebrow">{{ page.categories | first | default: 'Notes' }}</p>
+    <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>{{ page.categories | first | default: 'Notes' }}</p>
     <h1>{{ page.title }}</h1>
     {% if page.description %}<p class="post-deck">{{ page.description }}</p>{% endif %}
     <div class="post-meta">
       <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%B %-d, %Y' }}</time>
       {% if page.reading_time %}<span aria-hidden="true">·</span><span>{{ page.reading_time }} min read</span>{% endif %}
+      <span aria-hidden="true">·</span><span>Under 2,000 words</span>
     </div>
   </header>
   <div class="prose">
     {{ content }}
   </div>
-  <div class="post-end"><span aria-hidden="true">✳</span><span>Thanks for reading.</span></div>
+  <div class="post-end"><span aria-hidden="true">✳</span><span>That’s the idea. Keep asking questions.</span></div>
 </article>

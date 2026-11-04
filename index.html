@@ -3,25 +3,44 @@ layout: default
 title: Home
 ---
 <section class="hero">
-  <p class="eyebrow">A technical blog by Ariary</p>
-  <h1>Big ideas.<br><span>Clear explanations.</span></h1>
-  <p class="hero-copy">Notes on software, security, and the technology shaping our world—kept practical and under 2,000 words per post.</p>
+  <div class="hero-copy-block">
+    <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span> Ariary's technical field notes</p>
+    <h1>Understand the<br><span>things under the hood.</span></h1>
+    <p class="hero-copy">Friendly, visual explanations of software and security. One useful idea at a time, always under 2,000 words.</p>
+    <a class="hero-link" href="{{ site.posts.first.url | relative_url }}">Start with the latest article <span aria-hidden="true">↗</span></a>
+  </div>
+  <figure class="hero-visual" aria-label="A simplified diagram showing instructions and outside content reaching an AI model">
+    <div class="visual-label"><span class="live-dot" aria-hidden="true"></span> A tiny systems sketch</div>
+    <div class="mini-flow">
+      <div class="mini-inputs">
+        <div class="mini-node node-trusted"><span class="node-icon" aria-hidden="true">✓</span><span><b>App rules</b><small>trusted instructions</small></span></div>
+        <div class="mini-node node-untrusted"><span class="node-icon" aria-hidden="true">↳</span><span><b>Outside text</b><small>untrusted data</small></span></div>
+      </div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div class="mini-model"><span aria-hidden="true">✳</span><b>AI model</b><small>one shared context</small></div>
+    </div>
+    <figcaption>Ideas are easier to understand when you can see the pieces.</figcaption>
+  </figure>
 </section>
 <section class="article-section" aria-labelledby="latest-heading">
   <div class="section-heading">
-    <h2 id="latest-heading">Latest writing</h2>
+    <div><p class="eyebrow">The reading list</p><h2 id="latest-heading">Latest writing</h2></div>
     <span>{{ site.posts | size }} article{% if site.posts.size != 1 %}s{% endif %}</span>
   </div>
   <div class="article-list">
     {% for post in site.posts %}
       <article class="article-card">
-        <p class="eyebrow">{{ post.categories | first | default: 'Notes' }} <span aria-hidden="true">·</span> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%b %-d, %Y' }}</time></p>
-        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
-        <p>{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
-        <a class="read-link" href="{{ post.url | relative_url }}">Read article <span aria-hidden="true">→</span></a>
+        <div class="article-number" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</div>
+        <div class="article-card-content">
+          <p class="eyebrow">{{ post.categories | first | default: 'Notes' }} <span aria-hidden="true">·</span> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%b %-d, %Y' }}</time></p>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p>{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
+          <a class="read-link" href="{{ post.url | relative_url }}">Read article <span aria-hidden="true">→</span></a>
+        </div>
       </article>
     {% else %}
       <p>New articles are on the way.</p>
     {% endfor %}
   </div>
+  <p class="word-limit-note"><span aria-hidden="true">✳</span> The challenge: every post stays under 2,000 words.</p>
 </section>

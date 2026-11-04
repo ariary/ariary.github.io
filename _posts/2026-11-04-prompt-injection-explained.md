@@ -11,6 +11,22 @@ Imagine asking an AI assistant to summarize an email. The email contains an ordi
 
 That ambiguity is the heart of **prompt injection**, a security problem that appears when an AI system processes instructions alongside content that may itself contain instructions.
 
+<figure class="flow-figure" aria-labelledby="context-flow-caption">
+  <figcaption id="context-flow-caption">One model, several kinds of context</figcaption>
+  <div class="article-flow" role="img" aria-label="Application instructions and outside content are both passed into the AI model">
+    <div class="flow-card trusted"><b>Application rules</b><span>What the assistant should do</span></div>
+    <span class="diagram-arrow" aria-hidden="true">→</span>
+    <div class="flow-card untrusted"><b>Outside content</b><span>Documents, pages, messages</span></div>
+    <span class="diagram-arrow" aria-hidden="true">→</span>
+    <div class="flow-card model"><b>AI model</b><span>Shared text context</span></div>
+  </div>
+</figure>
+
+<details class="try-it">
+  <summary>Why does the outside content matter?</summary>
+  <p>The assistant is asked to analyze a document, not take orders from it. But the document can contain text that looks like an instruction. The application must treat that text as untrusted data and limit what the assistant can do.</p>
+</details>
+
 ## The short version
 
 Prompt injection is an attempt to steer an AI model by putting instructions in the material it reads. The material might be a user message, a web page, an email, a document, or text extracted from an image. If the model confuses that untrusted content with instructions it should follow, it may produce an unwanted answer or take an unsafe action.
