@@ -1,0 +1,8 @@
+title: Ariary's Technical Blog
+description: Clear, practical notes on software, security, and technology.
+url: "https://ariary.github.io"
+baseurl: ""
+markdown: kramdown
+permalink: /:categories/:year/:month/:day/:title/
+
+plugins: []

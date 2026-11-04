@@ -1,0 +1,27 @@
+---
+layout: default
+title: Home
+---
+<section class="hero">
+  <p class="eyebrow">A technical blog by Ariary</p>
+  <h1>Big ideas.<br><span>Clear explanations.</span></h1>
+  <p class="hero-copy">Notes on software, security, and the technology shaping our world—kept practical and under 2,000 words per post.</p>
+</section>
+<section class="article-section" aria-labelledby="latest-heading">
+  <div class="section-heading">
+    <h2 id="latest-heading">Latest writing</h2>
+    <span>{{ site.posts | size }} article{% if site.posts.size != 1 %}s{% endif %}</span>
+  </div>
+  <div class="article-list">
+    {% for post in site.posts %}
+      <article class="article-card">
+        <p class="eyebrow">{{ post.categories | first | default: 'Notes' }} <span aria-hidden="true">·</span> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%b %-d, %Y' }}</time></p>
+        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+        <p>{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
+        <a class="read-link" href="{{ post.url | relative_url }}">Read article <span aria-hidden="true">→</span></a>
+      </article>
+    {% else %}
+      <p>New articles are on the way.</p>
+    {% endfor %}
+  </div>
+</section>
