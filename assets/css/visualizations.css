@@ -1,4 +1,22 @@
 /* Prompt-injection article: illustrative visualizations and local-only demo. */
+.context-comparison { margin: 26px 0; padding: 22px; border: 1px solid var(--line); border-radius: 15px; background: var(--white); }
+.context-comparison figcaption { margin-bottom: 18px; font-size: 15px; font-weight: 700; }
+.context-prompts, .context-results { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.prose .context-prompts p { margin: 0; padding: 16px; border-radius: 10px; background: var(--paper); font-size: 16px; }
+.context-prompts mark { background: transparent; color: inherit; border-bottom: 2px dotted var(--accent); }
+.context-comparison:has(.context-reveal[open]) mark { background: var(--accent-wash); color: var(--accent-dark); border-bottom-style: solid; }
+.context-reveal { margin-top: 18px; }
+.context-reveal summary, .attention-math summary { width: fit-content; padding: 10px 14px; border: 1px solid var(--accent); border-radius: 8px; color: var(--accent-dark); font-size: 13px; font-weight: 700; cursor: pointer; }
+.context-reveal summary:focus-visible, .attention-math summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 3px; }
+.context-results { margin-top: 18px; }
+.prose .context-results h3 { margin: 0 0 12px; font: 600 13px var(--sans); letter-spacing: 0; }
+.probability-row { display: grid; grid-template-columns: 42px minmax(0, 1fr) 36px; align-items: center; gap: 8px; margin: 10px 0; font: 11px var(--mono); }
+.probability-track { height: 12px; border-radius: 4px; background: var(--accent-wash); overflow: hidden; }
+.probability-track > span { display: block; height: 100%; background: var(--accent); }
+.prose .context-insight { margin: 18px 0 0; font-size: 14px; }
+.prose .context-note { margin: 18px 0 0; color: var(--muted); font-size: 12px; }
+.attention-math { margin: 22px 0; }
+.prose .attention-math p { margin: 14px 0 0; font-size: 14px; overflow-wrap: anywhere; }
 .concept-callout { margin: 20px 0 24px; padding: 18px 22px; border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; background: var(--accent-wash); }
 .prose .concept-callout p { margin: 0; color: var(--accent-dark); font-size: clamp(18px, 3vw, 22px); font-weight: 700; line-height: 1.5; }
 .text-generation { margin: 26px 0 30px; padding: 22px; border: 1px solid var(--line); border-radius: 15px; background: var(--white); }
@@ -50,6 +68,8 @@
 .lab-log li { margin: 5px 0; }
 .injection-lab .lab-safety { margin: 12px 0 0; color: var(--muted); font-size: 11px; }
 @media (max-width: 600px) {
+  .context-comparison { padding: 15px; }
+  .context-prompts, .context-results { grid-template-columns: 1fr; }
   .text-generation { padding: 15px; }
   .generation-flow { grid-template-columns: 1fr; }
   .generation-arrow { transform: rotate(90deg); }
@@ -61,6 +81,7 @@
   .injection-lab { padding: 15px; }
 }
 @media print {
+  .context-comparison { break-inside: avoid; }
   .concept-callout, .text-generation { break-inside: avoid; }
   .generation-controls, .token-status, .token-output { display: none; }
   .generation-print { display: block; }
