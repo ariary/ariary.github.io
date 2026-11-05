@@ -1,22 +1,40 @@
 ---
 layout: post
 title: "Prompt Injection, Explained"
+icon: "🃏"
 description: "From next-token prediction to tool-using agents: a visual, hands-on explanation of prompt injection."
 date: 2026-11-04 09:00:00 -0000
 categories: [security]
 reading_time: 6
 demo: true
+llm_demo: true
 ---
 
-# Prompt Injection, Explained
-
-Prompt injection sounds mysterious until we separate three ideas: how a language model processes text, how an agent uses tools, and how untrusted text can influence that agent.
-
-This short tour builds those ideas in order. The diagrams are simplified teaching models—not a view into any particular model's private internal state.
+“Prompt injection” appears everywhere in security coverage, but what happens beyond those headlines? Results vary between models and runs, yet its core trick is simple: untrusted text tries to pass as instructions. Let’s look under the hood to understand how it works.
 
 ## 1. An LLM, simply
 
-A language model receives text as **tokens**—small pieces such as words, word fragments, or punctuation. It turns tokens into numerical vectors, processes those vectors through transformer layers, and predicts a probability distribution for the next token. It repeats that process to produce a response.
+<aside class="concept-callout" aria-label="Key idea"><p>An LLM generates text from text input.</p></aside>
+
+<figure class="text-generation" data-llm-demo aria-labelledby="generation-caption">
+  <figcaption id="generation-caption">Text in. Text out. One token at a time.</figcaption>
+  <div class="generation-flow">
+    <div class="generation-card"><span class="generation-label">Text input</span><p>Describe a clear sky.</p></div>
+    <span class="generation-arrow" aria-hidden="true">→</span>
+    <div class="generation-card generation-model"><span class="generation-label">LLM</span><p>Predict next token</p><span class="generation-loop">Append → repeat</span></div>
+    <span class="generation-arrow" aria-hidden="true">→</span>
+    <div class="generation-card"><span class="generation-label">Generated text</span><div class="token-output" data-token-output aria-label="Generated text">The sky is cloudless.</div></div>
+  </div>
+  <div class="generation-controls" data-token-controls hidden>
+    <button type="button" data-next-token>Next token</button>
+    <button type="button" data-reset-tokens>Reset</button>
+  </div>
+  <p class="token-status" data-token-status role="status" aria-live="polite" aria-atomic="true">Example output: The sky is cloudless.</p>
+  <p class="generation-note">Illustrative simulation—not a live model. Token boundaries vary by tokenizer; here, <code>cloud</code> + <code>less</code> show how a word can span tokens.</p>
+  <p class="generation-print">Example output: The sky is cloudless.</p>
+</figure>
+
+Internally, text becomes **tokens**—words, word fragments, or punctuation—then numerical vectors. Transformer layers process them to predict probabilities for the next token. Each generated token joins the context for the next step.
 
 A key transformer operation is **attention**. Each token can use information from other tokens in its context to help calculate its next representation. A simplified attention score between a query vector *q* and key vector *k* is their dot product, scaled by the vector size. A softmax turns scores into weights, which are used to combine value vectors *v*:
 
@@ -43,6 +61,8 @@ The lesson is not that attention alone causes prompt injection. It is that the m
 
 ## 2. From LLM to agent: the tool loop
 
+<aside class="concept-callout" aria-label="Key idea"><p>An agent connects an LLM to tools.</p></aside>
+
 A plain LLM returns text. An **agent** is an application pattern that lets a model request tools—perhaps to search a knowledge base, read a document, or perform an action. The application decides which tools exist, executes allowed requests, and returns results to the model.
 
 <figure class="flow-figure" aria-labelledby="tool-flow-caption">
@@ -57,6 +77,8 @@ A plain LLM returns text. An **agent** is an application pattern that lets a mod
 A tool request is not permission by itself. The application should check who is asking, what the tool can do, and whether the action needs approval. A read-only lookup and sending a message should not share the same trust level.
 
 ## 3. Prompt injection: when data tries to act like instructions
+
+<aside class="concept-callout" aria-label="Key idea"><p>Prompt injection tries to turn untrusted text into instructions.</p></aside>
 
 Prompt injection happens when text the model is supposed to process—such as a web page or document—contains instructions that try to redirect the model. The injected text is data, not an authorized command, but the model may still be influenced by it.
 

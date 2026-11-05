@@ -33,7 +33,7 @@ title: Home
         <div class="article-number" aria-hidden="true">{% if forloop.index < 10 %}0{% endif %}{{ forloop.index }}</div>
         <div class="article-card-content">
           <p class="eyebrow">{{ post.categories | first | default: 'Notes' }} <span aria-hidden="true">·</span> <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%b %-d, %Y' }}</time></p>
-          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <h3><a href="{{ post.url | relative_url }}">{% if post.icon %}<span aria-hidden="true">{{ post.icon }}</span> {% endif %}{{ post.title }}</a></h3>
           <p>{{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 180 }}</p>
           <a class="read-link" href="{{ post.url | relative_url }}">Read article <span aria-hidden="true">→</span></a>
         </div>
