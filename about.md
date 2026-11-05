@@ -4,10 +4,10 @@ title: About
 permalink: /about/
 ---
 <section class="page-intro">
-  <p class="eyebrow">A little about this site</p>
-  <h1>Useful ideas, without the noise.</h1>
-  <p class="post-deck">This is Ariary's technical blog: approachable explanations and practical notes on software, security, and technology.</p>
+  <svg class="eyebrow" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <path d="M4 7V4h3M17 4h3v3M20 17v3h-3M7 20H4v-3" />
+    <circle cx="11" cy="11" r="3" />
+    <path d="m16 16-2.1-2.1" />
+  </svg>
+  <h1>Software and security, explained in under 2,000 words.</h1>
 </section>
-<div class="prose">
-  <p>Each article aims to be clear, useful, and concise. The writing challenge is to keep every post under 2,000 words—enough room to explain an idea, with a reason to edit carefully.</p>
-</div>
